@@ -13,7 +13,7 @@
     box-sizing: border-box;
 }
 
-.buttons {
+.operators {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -51,7 +51,7 @@
     width: 300px; /* Same width as the display */
 }
 
-.clearEnter {
+.controls {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
