@@ -84,14 +84,40 @@ two.addEventListener("click", () => {
     updateDisplay();
 });
 
+
+
 addition.addEventListener("click", () => {
     calculation.push("+");
     updateDisplay();
 });
 
+subtraction.addEventListener("click", () => {
+    calculation.push("-");
+    updateDisplay();
+});
+
+multiplication.addEventListener("click", () => {
+    calculation.push("*");
+    updateDisplay();
+});
+
+division.addEventListener("click", () => {
+    calculation.push("/");
+    updateDisplay();
+});
+
+
+
 clear.addEventListener("click", () => {
     calculation = [];
     updateDisplay();
+})
+
+enter.addEventListener("click", () => {
+    // start the function for doing the calculation 
+
+    // update the display with the result
+    
 })
 
 // update the display element with the text from the calculation array. 
