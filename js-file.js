@@ -65,6 +65,9 @@ const zero = document.getElementById("0");
 
 // select the html elements with different operators
 const addition = document.getElementById("addition");
+const subtraction = document.getElementById("subtraction");
+const division = document.getElementById("division");
+const multiplication = document.getElementById("multiplication");
 
 // select the html elements with the different controls. 
 const clear = document.getElementById("clear");
@@ -73,6 +76,11 @@ const enter = document.getElementById("enter");
 // add an click event listener for the "1" button. and add the "number" to the array. 
 one.addEventListener("click", () => {
     calculation.push(one.id);
+    updateDisplay();
+});
+
+two.addEventListener("click", () => {
+    calculation.push(two.id);
     updateDisplay();
 });
 
