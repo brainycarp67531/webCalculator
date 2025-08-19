@@ -46,3 +46,50 @@ let number2 = 0;
 // variable to store the variable. 
 let operation = "";
 
+
+
+// create an array for storing the calculation in 
+let calculation = [];
+
+// select the html element with different numbers
+const one = document.getElementById("1");
+const two = document.getElementById("2");
+const three = document.getElementById("3");
+const four = document.getElementById("4");
+const five = document.getElementById("5");
+const six = document.getElementById("6");
+const seven = document.getElementById("7");
+const eight = document.getElementById("8");
+const nine = document.getElementById("9");
+const zero = document.getElementById("0");
+
+// select the html elements with different operators
+const addition = document.getElementById("addition");
+
+// select the html elements with the different controls. 
+const clear = document.getElementById("clear");
+const enter = document.getElementById("enter");
+
+// add an click event listener for the "1" button. and add the "number" to the array. 
+one.addEventListener("click", () => {
+    calculation.push(one.id);
+    updateDisplay();
+});
+
+addition.addEventListener("click", () => {
+    calculation.push("+");
+    updateDisplay();
+});
+
+clear.addEventListener("click", () => {
+    calculation = [];
+    updateDisplay();
+})
+
+// update the display element with the text from the calculation array. 
+function updateDisplay() {
+    const display = document.getElementById("display");
+    display.textContent = calculation.join("");
+};
+
+
