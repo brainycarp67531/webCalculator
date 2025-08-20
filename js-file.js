@@ -157,9 +157,14 @@ enter.addEventListener("click", () => {
     // start the function for doing the calculation
     
     // Check for multiplications via a loop over the calculation array
-    
+    for (let i = one; i < calculation.length; i++) {
+        // and store the multiplication sign in the variable operation. 
+        if (calculation[i] === "*") {
+            operation = calculation[i];
+        }
 
-    // and store the multiplication sign in the variable operation. 
+    }
+
 
     // multiple the two numbers before and after the multiplication sign
         // check before the sign and store the first number in the variable "number1"
