@@ -154,25 +154,87 @@ clear.addEventListener("click", () => {
 })
 
 enter.addEventListener("click", () => {
+    console.log("THis is the calculation we will do:")
+    console.log(calculation);
+
     // start the function for doing the calculation
     
     // Check for multiplications via a loop over the calculation array
-    for (let i = one; i < calculation.length; i++) {
+    for (let i = 0; i < calculation.length; i++) {
         // and store the multiplication sign in the variable operation. 
         if (calculation[i] === "*") {
             operation = calculation[i];
+            console.log("operator is stored.")
+            console.log(operation);
+            console.log("i");
+            console.log(i);
+            console.log(typeof(calculation[0]));
+            console.log(typeof(calculation[i]));
+
+
+            
+            // multiple the two numbers before and after the multiplication sign
+            // check before the sign and store the first number in the variable "number1"
+            for (let j = 1; i - j >= 0; j++) {
+                if (calculation[i-j] >= "0" && calculation[i-j] <= "9") {
+                    console.log("testing for a number 1 at i =", i-j);
+                    if (i-j == 0) {
+                        // store the number before the * sign in the variable "number1".
+                        number1 = parseInt(calculation.slice(0, i).join(""));
+                        console.log("number1", number1);
+                        break;
+                    }
+                    continue;
+                } else {
+                    // store the number before the * sign in the variable "number1".
+                    number1 = parseInt(calculation.slice(i - j + 1, i).join(""));
+                    console.log("number1", number1);
+                    break;
+                };
+            };
+
+
+
+
+
+            // check after the sign and store the second number in the variable "number2"
+            for (let k = 1; i + k < calculation.length; k++) {
+                if (calculation[i+k] >= "0" && calculation[i+k] <= "9") {
+                    console.log("testing for a number 2 at i = ", i+k);
+                    if (i+k == calculation.length - 1) {
+                        number2 = parseInt(calculation.slice(i + 1).join(""));
+                        console.log("number2", number2);
+                        break;
+                    }
+                    continue;
+                }else {
+                    // store the number before the * sign in the variable "number1".
+                    number2 = parseInt(calculation.slice(i + 1, i + k).join(""));
+                    console.log("number2", number2);
+                    break;
+                };
+            };
+
+
+
+
+
         }
+
+        
 
     }
 
+    
 
-    // multiple the two numbers before and after the multiplication sign
-        // check before the sign and store the first number in the variable "number1"
+    // do the operation 
+    let result = operate(number1, number2, "m");
+    console.log("result");
+    console.log(result);
 
-        // check after the sign and store the second number in the variable "number"
+    const display = document.getElementById("display");
+    display.textContent = result;
 
-        // do the operation 
-        let result = operate(number1, number2, "m");
 
     // return a new array with the result of the multiplication instead of the two numbers and the multiplication sign
 
@@ -186,6 +248,9 @@ enter.addEventListener("click", () => {
 
     // Do same thing but for subtraction
 
+    // Update the display with the result. 
+    // updateDisplayWithResult(result);
+
 
 })
 
@@ -194,5 +259,10 @@ function updateDisplay() {
     const display = document.getElementById("display");
     display.textContent = calculation.join("");
 };
+
+function updateDisplayWithResult(result) {
+    const display = document.getElementById("display");
+    display.textContent = result;
+}
 
 
