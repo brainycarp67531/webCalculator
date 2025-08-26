@@ -161,6 +161,13 @@ enter.addEventListener("click", () => {
     
     // Check for multiplications via a loop over the calculation array
     for (let i = 0; i < calculation.length; i++) {
+
+        // variables to keep track of what to replace in the initial array. Will be used when spliceing the calculation array. 
+        let startIndex = 0;
+        let deleteCount = 0;
+        // variable to keep track of the result 
+        let result = 0;
+
         // and store the multiplication sign in the variable operation. 
         if (calculation[i] === "*") {
             operation = calculation[i];
@@ -172,7 +179,6 @@ enter.addEventListener("click", () => {
             console.log(typeof(calculation[i]));
 
 
-            
             // multiple the two numbers before and after the multiplication sign
             // check before the sign and store the first number in the variable "number1"
             for (let j = 1; i - j >= 0; j++) {
@@ -182,6 +188,7 @@ enter.addEventListener("click", () => {
                         // store the number before the * sign in the variable "number1".
                         number1 = parseInt(calculation.slice(0, i).join(""));
                         console.log("number1", number1);
+                        startIndex = 0;
                         break;
                     }
                     continue;
@@ -189,12 +196,11 @@ enter.addEventListener("click", () => {
                     // store the number before the * sign in the variable "number1".
                     number1 = parseInt(calculation.slice(i - j + 1, i).join(""));
                     console.log("number1", number1);
+                    startIndex = (i - j + 1);
+                    console.log("startIndex: ", startIndex);
                     break;
                 };
             };
-
-
-
 
 
             // check after the sign and store the second number in the variable "number2"
@@ -204,6 +210,7 @@ enter.addEventListener("click", () => {
                     if (i+k == calculation.length - 1) {
                         number2 = parseInt(calculation.slice(i + 1).join(""));
                         console.log("number2", number2);
+                        deleteCount = calculation.length - 1 - startIndex;
                         break;
                     }
                     continue;
@@ -211,32 +218,38 @@ enter.addEventListener("click", () => {
                     // store the number before the * sign in the variable "number1".
                     number2 = parseInt(calculation.slice(i + 1, i + k).join(""));
                     console.log("number2", number2);
+                    deleteCount = i + k - startIndex;
+                    console.log("deleteCount: ", deleteCount);
                     break;
                 };
             };
 
+            
+            // check if number1 and number2 is greater then Zero 
+            if (number1 > 0 && number2 > 0) {
+                // calculate the result
+                result = operate(number1, number2, "m");
+                console.log("result: ", result);
+                
+                // Make the result in to and array 
+                result = result.toString().split("").map(Number);
+                console.log("result as an array: ", result);
 
+                // use slice to insert the calculate value in the initial array and replace the calcualtion. 
+                calculation.splice(startIndex, deleteCount, ...result);
+                console.log("the updated calculation array: ", calculation);
 
-
+            }
 
         }
 
-        
-
     }
 
-    
 
-    // do the operation 
-    let result = operate(number1, number2, "m");
-    console.log("result");
-    console.log(result);
-
-    const display = document.getElementById("display");
-    display.textContent = result;
+    updateDisplay();
 
 
-    // return a new array with the result of the multiplication instead of the two numbers and the multiplication sign
+
 
    // repeat until no more multiplication sign is present. 
     
