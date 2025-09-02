@@ -136,30 +136,20 @@ enter.addEventListener("click", () => {
     console.log(calculation);
 
     // start the function for doing the calculation
-    
+
+    // do all the multiplication operations. 
     calculation = doTheCalculation(calculation, "*")
+
+    // do all the division operations
     calculation = doTheCalculation(calculation, "/")
+
+    // do all the addition operations
     calculation = doTheCalculation(calculation, "+")
+
+    // do all the subtraction operations 
     calculation = doTheCalculation(calculation, "-")
 
     updateDisplay();
-
-
-
-
-   // repeat until no more multiplication sign is present. 
-    
-
-    
-    // Do same thing but for division
-
-    // Do same thing but for addition
-
-    // Do same thing but for subtraction
-
-    // Update the display with the result. 
-    // updateDisplayWithResult(result);
-
 
 })
 
