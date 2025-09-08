@@ -20,9 +20,11 @@ let input = 0;
 
 // variable to store the first number. 
 let number1 = "";
+let number1_value = false;
 
 // variable to store the second number. 
 let number2 = "";
+let number2_value = false;
 
 // variable to store the variable. 
 let operation = "";
@@ -119,6 +121,7 @@ addition.addEventListener("click", () => {
     input = 0;
 
     updateDisplay(operation);
+
 });
 
 subtraction.addEventListener("click", () => {
@@ -166,6 +169,8 @@ clear.addEventListener("click", () => {
     calculation = [];
     number1 = 0;
     number2 = 0;
+    number1_value = false;
+    number2_value = false;
     operation = "";
     input = 0;
     result = 0;
@@ -173,13 +178,18 @@ clear.addEventListener("click", () => {
 })
 
 enter.addEventListener("click", () => {
-    console.log("THis is the calculation we will do:")
-
+    console.log("This is the calculation we will do:")
+    
     // store the input in the variable number2
     number2 = input;
 
+    console.log(number1 + " " + operation + " " + number2);
+    
     // do the operation
     result = operate(number1, number2, operation);
+
+    // round the number 
+    result = Math.round(result * 100) / 100;
 
     // store the result in input variable to continue the calculation. 
     input = result;
