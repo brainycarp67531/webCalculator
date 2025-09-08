@@ -20,11 +20,9 @@ let input = 0;
 
 // variable to store the first number. 
 let number1 = "";
-let number1_value = false;
 
 // variable to store the second number. 
 let number2 = "";
-let number2_value = false;
 
 // variable to store the variable. 
 let operation = "";
@@ -168,8 +166,6 @@ clear.addEventListener("click", () => {
     calculation = [];
     number1 = 0;
     number2 = 0;
-    number1_value = false;
-    number2_value = false;
     operation = "";
     input = 0;
     result = 0;
@@ -184,6 +180,9 @@ enter.addEventListener("click", () => {
 
     // do the operation
     result = operate(number1, number2, operation);
+
+    // store the result in input variable to continue the calculation. 
+    input = result;
 
     updateDisplay(result);
 
