@@ -20,14 +20,15 @@ let input = 0;
 
 // variable to store the first number. 
 let number1 = "";
-let number1_value = false;
+
 
 // variable to store the second number. 
 let number2 = "";
-let number2_value = false;
+
 
 // variable to store the variable. 
 let operation = "";
+let operation_state = false;
 
 // create an array for storing the calculation in 
 let calculation = [];
@@ -59,129 +60,135 @@ const enter = document.getElementById("enter");
 
 // add an click event listener for the number button. and add the "number" to the array. 
 one.addEventListener("click", () => {
-    input = collectInput(input, one.id);
-    updateDisplay(input);
+    collectInput(one.id);
 });
 
 two.addEventListener("click", () => {
-    input = collectInput(input, two.id);
-    updateDisplay(input);
+    collectInput(two.id);
 });
 
 three.addEventListener("click", () => {
-    input = collectInput(input, three.id);
-    updateDisplay(input);
+    collectInput(three.id);
 });
 
 four.addEventListener("click", () => {
-    input = collectInput(input, four.id);
-    updateDisplay(input);
+    collectInput(four.id);
 });
 
 five.addEventListener("click", () => {
-    input = collectInput(input, five.id);
-    updateDisplay(input);
+    collectInput(five.id);
 });
 
 six.addEventListener("click", () => {
-    input = collectInput(input, six.id);
-    updateDisplay(input);
+    collectInput(six.id);
 });
 
 seven.addEventListener("click", () => {
-    input = collectInput(input, seven.id);
-    updateDisplay(input);
+    collectInput(seven.id);
 });
 
 eight.addEventListener("click", () => {
-    input = collectInput(input, eight.id);
-    updateDisplay(input);
+    collectInput(eight.id);
 });
 
 nine.addEventListener("click", () => {
-    input = collectInput(input, nine.id);
-    updateDisplay(input);
+    collectInput(nine.id);
 });
 
 zero.addEventListener("click", () => {
-    input = collectInput(input, zero.id);
-    updateDisplay(input);
+    collectInput(zero.id);
 });
 
 
 // event listeners for the operators
 addition.addEventListener("click", () => {
-    // Store the number from the input in the number1 variable. 
-    number1 = input;
-
-    // store the operator in the operation variable. 
-    operation = "+";
-
-    // reset the input variable to 0
-    input = 0;
-
-    updateDisplay(operation);
-
+    if (operation_state == false) {
+        operation = "+";
+        operation_state = true;
+        updateDisplay(operation);
+    } else if (operation_state == true) {
+        doTheCalculation();
+        operation = "+";
+    }
 });
 
 subtraction.addEventListener("click", () => {
-    // Store the number from the input in the number1 variable. 
-    number1 = input;
-
-    // store the operator in the operation variable. 
-    operation = "-";
-
-    // reset the input variable to 0
-    input = 0;
-
-    updateDisplay(operation);
+    if (operation_state == false) {
+        operation = "-";
+        operation_state = true;
+        updateDisplay(operation);
+    } else if (operation_state == true) {
+        doTheCalculation();
+        operation = "-";
+    }
 });
 
 multiplication.addEventListener("click", () => {
-    // Store the number from the input in the number1 variable. 
-    number1 = input;
-
-    // store the operator in the operation variable. 
-    operation = "*";
-
-    // reset the input variable to 0
-    input = 0;
-
-    updateDisplay(operation);
+    if (operation_state == false) {
+        operation = "*";
+        operation_state = true;
+        updateDisplay(operation);
+    } else if (operation_state == true) {
+        doTheCalculation();
+        operation = "*";
+    }
 });
 
 division.addEventListener("click", () => {
-    // Store the number from the input in the number1 variable. 
-    number1 = input;
-
-    // store the operator in the operation variable. 
-    operation = "/";
-
-    // reset the input variable to 0
-    input = 0;
-
-    updateDisplay(operation);
+    if (operation_state == false) {
+        operation = "/";
+        operation_state = true;
+        updateDisplay(operation);
+    } else if (operation_state == true) {
+        doTheCalculation();
+        operation = "/";
+    }
 });
 
 
 // event listeners for the control buttons. 
 clear.addEventListener("click", () => {
-    calculation = [];
-    number1 = 0;
-    number2 = 0;
-    number1_value = false;
-    number2_value = false;
-    operation = "";
-    input = 0;
-    result = 0;
-    updateDisplay();
+
+    clearEverything();
+
 })
 
 enter.addEventListener("click", () => {
-    console.log("This is the calculation we will do:")
     
-    // store the input in the variable number2
-    number2 = input;
+    console.log("This is the calculation we will do:")
+
+    doTheCalculation();
+
+})
+
+// update the display element with the text from the calculation array. 
+function updateDisplay(text) {
+    
+    const display = document.getElementById("display");
+    display.textContent = text;
+};
+
+
+function collectInput(id) {
+
+    if (operation_state == false) {
+        number1 = number1 * 10 + parseInt(id);
+        updateDisplay(number1);
+    } else if (operation_state == true) {
+        number2 = number2 * 10 + parseInt(id);
+        updateDisplay(number2); 
+    };
+}
+
+
+function doTheCalculation() {
+
+    // check that we do not devid with zero. 
+    if (operation == "/" && number2 == 0) {
+        alert("You should not divide with zero");
+        clearEverything();
+        return;
+    }
 
     console.log(number1 + " " + operation + " " + number2);
     
@@ -192,25 +199,21 @@ enter.addEventListener("click", () => {
     result = Math.round(result * 100) / 100;
 
     // store the result in input variable to continue the calculation. 
-    input = result;
+    number1 = result;
+    number2 = 0;
 
     updateDisplay(result);
 
-})
-
-// update the display element with the text from the calculation array. 
-function updateDisplay(text) {
-    const display = document.getElementById("display");
-    display.textContent = text;
-};
-
-// function updateDisplayWithResult(result) {
-//     const display = document.getElementById("display");
-//     display.textContent = result;
-// }
-
-function collectInput(input, id) {
-    return input * 10 + parseInt(id);
 }
 
 
+function clearEverything() {
+    calculation = [];
+    number1 = 0;
+    number2 = 0;
+    operation = "";
+    operation_state = false;
+    input = 0;
+    result = 0;
+    updateDisplay();
+};
